@@ -34,3 +34,11 @@ SELECT * FROM students WHERE id != 1; -- 여집합(해당 조건이 아닌)
 SELECT * FROM students WHERE age BETWEEN 20 AND 40; -- 20 이상, 40 이하
 
 SELECT * FROM students WHERE id IN (1,3,5,7,83); -- 여러 데이터 한 번에
+
+-- 문자열 패턴 (% > 있을 수도, 없을 수도 있다. _ > 정확히 개수만큼 글자가 있다.)
+-- 가 씨만 찾기
+SELECT * FROM students WHERE name LIKE '가%';
+-- '다' 글자만 들어가는 사람을 찾기
+SELECT * FROM students WHERE name LIKE '%다%';
+-- 이름이 정확히 3글자인 '나'씨 찾기
+SELECT * FROM students WHERE name LIKE '나__'; -- 나머지 글자 개수만큼 언더바
