@@ -1,5 +1,5 @@
 --  10-str-func.sql
-USE leture;
+USE lecture;
 
 -- 길이
 SELECT char_length('hello sql');
