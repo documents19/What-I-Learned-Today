@@ -43,7 +43,7 @@ FROM dt_demo;
  
 SELECT
 	name, 
-    IFNULL(score, 0),
+    IFNULL(score, 0) AS 점수,
     CASE
 		WHEN score >= 90 THEN 'A'
 		WHEN score >= 80 THEN 'B'
