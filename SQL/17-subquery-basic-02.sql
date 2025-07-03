@@ -2,7 +2,7 @@
 
 USE lecture;
 -- Scala -> 한 개의 데이터
--- Vecor -> 한 줄로 이루어진 데이터
+-- Vector -> 한 줄로 이루어진 데이터
 -- Matrix -> 행과 열로 이루어진 데이터
 SELECT * FROM customers;
 

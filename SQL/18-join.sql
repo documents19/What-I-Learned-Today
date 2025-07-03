@@ -27,13 +27,12 @@ ORDER BY s.total_amount DESC;
 SELECT 
 	c.customer_id,
     c.customer_name,
-    c.customer_type, COUNT( * ) AS 주문횟수,
-    SUM(s.total_amount) AS 총구매액
+    c.customer_type
     FROM customers c
 -- LEFT JOIN -> 왼쪽 테이블(c)의 모든 데이터와 + 매칭되는 오른쪽 데이터 | 매칭되는 오른쪽 데이터 (없어도 등장)
-LEFT JOIN sales s ON c.customer_id = s.customer_id;
+LEFT JOIN sales s ON c.customer_id = s.customer_id
   -- WHERE s.id IS NULL; -> 한 번도 주문한 적 없는 사람들이 나옴
-  
+  WHERE s.customer_id IS NULL;
  
  SELECT
 	c.customer_name,
