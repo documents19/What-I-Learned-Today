@@ -3,7 +3,7 @@ USE lecture;
 
 -- 고객정보 + 주문정보
 SELECT
-  *,
+  *, -- 지루하고 현학적임
   (
     SELECT customer_name FROM customers c
     WHERE c.customer_id=s.customer_id
@@ -50,3 +50,24 @@ LEFT JOIN sales s ON c.customer_id = s.customer_id
     FROM customers c
     LEFT JOIN sales s ON c.customer_id = s.customer_id
     GROUP BY c.customer_id;
+    
+    
+-- INNER JOIN 교집합
+SELECT
+	'1. INNER JOIN' AS 구분,
+	COUNT(*) AS 줄수,
+    COUNT(DISTINCT c.customer_id) AS 고객수
+FROM customers c
+INNER JOIN sales s ON c.customer_id = s.customer_id;
+
+
+-- LEFT JOIN 왼쪽(FROM 뒤에 온) 테이블은 무조건 다 나옴
+SELECT
+	'2. LEFT JOIN' AS 구분,
+	COUNT(*) AS 줄수,
+    COUNT(DISTINCT c.customer_id) AS 고객수
+FROM customers c
+LEFT JOIN sales s ON c.customer_id = s.customer_id; -- 고객 수 50명이 무조건 확정이니 줄 수가 5개 추가됨
+
+-- UNION 단순 결과 합치기, 서로 형태가 똑같아야 함
+
