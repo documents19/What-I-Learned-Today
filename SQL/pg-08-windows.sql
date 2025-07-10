@@ -88,10 +88,29 @@ WHERE r.순위 <10;
 
 -- 1.지역-사람별 "매출데이터" 생성 [지역, 고객id, 이름, 해당 고객의 총 매출]
 
-SELECT 
-	region
-	customer_id
-	customer_name
-	
-
-
+WITH 매출데이터 AS (SELECT 
+		c.region AS 지역,
+		c.customer_id AS 고객id,
+		c.customer_name AS 고객이름,
+		SUM(o.amount) AS 고객별총매출
+	FROM customers c
+	INNER JOIN orders o ON c.customer_id=o.customer_id
+	GROUP BY c.customer_id
+),
+-- 2. "매출데이터"에 새로운 열(ROW_NUMBER) 추가
+지역별순위 AS(
+	SELECT
+		지역,
+		고객이름,
+		고객별총매출,
+		ROW_NUMBER() OVER(PARTITION BY 지역 ORDER BY 고객별총매출 DESC) AS 지역순위
+	FROM 매출데이터
+)
+-- 3. 최종데이터 표시
+SELECT
+	지역,
+	고객이름,
+	고객별총매출,
+	지역순위
+FROM 지역별순위
+WHERE 지역순위 < 4; -- 1~3위
